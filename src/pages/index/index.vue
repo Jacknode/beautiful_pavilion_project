@@ -1,7 +1,7 @@
 <template>
   <div class="container" @click="clickHandle('test click', $event)">
     <i-button type="primary" @click="bindViewTap">这是一个按钮</i-button>
-    <i-card full title="卡片标题" extra="额外内容" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+    <i-card full title="卡片标题" extra="额外内容" :thumb="userInfo.avatarUrl">
 
       <view slot="content">内容不错</view>
 
@@ -42,6 +42,17 @@ export default {
 
   components: {
     card
+  },
+   onPullDownRefresh() {
+    console.log('下拉刷新')
+    // to doing..
+    // 停止下拉刷新
+//    wx.stopPullDownRefresh();
+  },
+  // 上拉加载，拉到底部触发
+  onReachBottom() {
+    console.log('上拉加载')
+    // 到这底部在这里需要做什么事情
   },
 
   methods: {

@@ -1,68 +1,50 @@
 <template>
-  <div>
-    <banner></banner>
-    <div class="container" @click="clickHandle('test click', $event)">
+  <div class="container" @click="clickHandle('test click', $event)">
+    <i-button type="primary" @click="bindViewTap">这是一个按钮</i-button>
+    <i-card full title="卡片标题" extra="额外内容" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
 
-      <div class="userinfo" @click="bindViewTap">
-        <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-        <div class="userinfo-nickname">
-          <!--<card :text="userInfo.nickName"></card>-->
-        </div>
+      <view slot="content">内容不错</view>
+
+      <view slot="footer">尾部内容</view>
+
+    </i-card>
+    <div class="userinfo" @click="bindViewTap">
+      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
+      <div class="userinfo-nickname">
+        <card :text="userInfo.nickName"></card>
       </div>
-
-      <div class="usermotto">
-        <div class="user-motto">
-          <!--<card :text="motto"></card>-->
-        </div>
-      </div>
-
-      <form class="form-container">
-        <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-        <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-      </form>
-      <a href="/pages/counter/main" class="counter">去往Vuex示例页面11</a>
     </div>
+
+    <div class="usermotto">
+      <div class="user-motto">
+        <card :text="motto"></card>
+      </div>
+    </div>
+
+    <form class="form-container">
+      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
+      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
+    </form>
+    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
   </div>
 </template>
 
 <script>
-import banner from '@/components/banner'
-import {getNewStr} from '@/utils/public'
-import {Home} from '@/api/index'
+import card from '@/components/card'
 
 export default {
   data () {
     return {
       motto: 'Hello World',
-      userInfo: {},
-      indicatorDots: true,
-      autoplay: true,
-      interval: 5000,
-      duration: 900,
-      circular: true,
-      currentIndex: 0,
-      scaleX: (634 / 550).toFixed(4),
-      scaleY: (378 / 328).toFixed(4),
-      imgUrls: [
-        'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-      ]
+      userInfo: {}
     }
   },
 
   components: {
-    banner
+    card
   },
 
   methods: {
-    // 控制currentIndex以及动画执行索引descIndex的值
-    swiperChange (e) {
-      const that = this
-      this.currentIndex = e.mp.detail.current
-      this.scaleX = (634 / 550).toFixed(4)
-      this.scaleY = (378 / 328).toFixed(4)
-    },
     bindViewTap () {
       const url = '../logs/main'
       wx.navigateTo({ url })
@@ -81,39 +63,17 @@ export default {
     },
     clickHandle (msg, ev) {
       console.log('clickHandle:', msg, ev)
-    },
-    getData(){
-      let options = {
-        "loginUserID": "huileyou",
-        "loginUserPass": "123",
-        "operateUserID": "",
-        "operateUserName": "",
-        "pcName": "",
-        "provice": '四川',
-        "flag":"0"
-      }
-      Home(options).then((data)=>{
-        console.log(data)
-      })
     }
   },
 
   created () {
     // 调用应用实例的方法获取全局数据
-    this.getUserInfo();
-    this.getData()
+    this.getUserInfo()
   }
 }
 </script>
 
 <style scoped>
-  .slide-image {
-    width: 100%;
-    height: 100%;
-  }
-  .img-wrapper{
-    height: 100%;
-  }
 .userinfo {
   display: flex;
   flex-direction: column;

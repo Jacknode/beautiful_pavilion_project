@@ -10,7 +10,7 @@
 	"miniprogramRoot": "./dist/",
 	"compileType": "miniprogram",
 	"appid": "touristappid",
-	"projectname": "beautiful",
+	"projectname": "beautiful_project",
 	"condition": {
 		"search": {
 			"current": -1,

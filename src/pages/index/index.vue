@@ -28,6 +28,7 @@
 <script>
 import banner from '@/components/banner'
 import {getNewStr} from '@/utils/public'
+import {Home} from '@/api/index'
 
 export default {
   data () {
@@ -82,22 +83,17 @@ export default {
       console.log('clickHandle:', msg, ev)
     },
     getData(){
-      wx.request({
-        url:'http://hly.1000da.com.cn//TradeGood/GetTravelPageL',
-        data:JSON.stringify({
-          "loginUserID": "huileyou",
-          "loginUserPass": "123",
-          "operateUserID": "",
-          "operateUserName": "",
-          "pcName": "",
-          "provice": '四川',
-          "flag":"0"
-        }),
-        method:'POST',
-        header: 'application/x-www-form-urlencoded',
-        success:function (res) {
-          console.log(res)
-        }
+      let options = {
+        "loginUserID": "huileyou",
+        "loginUserPass": "123",
+        "operateUserID": "",
+        "operateUserName": "",
+        "pcName": "",
+        "provice": '四川',
+        "flag":"0"
+      }
+      Home(options).then((data)=>{
+        console.log(data)
       })
     }
   },
